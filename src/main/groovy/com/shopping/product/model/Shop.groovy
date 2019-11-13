@@ -8,17 +8,19 @@ import javax.persistence.Id
 import javax.persistence.Table
 
 @Entity
-@Table(name = "products")
-class Product {
-  public Product() {
+@Table(name = "shops")
+class Shop {
+
+  public Shop() {
   }
 
   @Id
-  @Column(name = "product_id")
+  @Column(name = "shop_id")
   @Type(type = "pg-uuid")
-  private UUID productId;
+  private UUID shopId;
 
-  private String productName;
+  @Column(name = "shop_name")
+  private String shopName;
 
 
 }

@@ -1,7 +1,13 @@
+CREATE TABLE IF NOT EXISTS roles (
+    role_id BIGSERIAL PRIMARY KEY,
+    role_name VARCHAR(50) NOT NULL
+)
+
 CREATE TABLE IF NOT EXISTS users (
     user_id UUID PRIMARY KEY,
     username VARCHAR(100) NOT NULL UNIQUE,
-    password VARCHAR(200),
+    password VARCHAR(200) NOT NULL,
+    role_id BIGINT NOT NULL REFERENCES roles(role_id) ON UPDATE CASCADE ON DELETE CASCADE,,
     first_name VARCHAR(100),
     last_name VARCHAR(100),
     email VARCHAR(200) NOT NULL UNIQUE,
@@ -22,11 +28,6 @@ CREATE TABLE IF NOT EXISTS categories (
     category_id BIGSERIAL PRIMARY KEY,
     category_name VARCHAR(100),
     parent_id BIGINT
-)
-
-CREATE TABLE IF NOT EXISTS roles (
-    role_id BIGSERIAL PRIMARY KEY,
-    role_name VARCHAR(50)
 )
 
 CREATE TABLE IF NOT EXISTS users_roles (
