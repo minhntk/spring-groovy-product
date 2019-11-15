@@ -1,10 +1,9 @@
 package com.shopping.product.service
 
-import com.shopping.product.dao.UserDAO
+
 import com.shopping.product.dto.RegisterRequestDTO
 import com.shopping.product.model.Role
 import com.shopping.product.model.User
-import org.springframework.beans.factory.annotation.Autowired
 
 trait UserServiceTrait {
 

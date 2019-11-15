@@ -36,12 +36,6 @@ CREATE TABLE IF NOT EXISTS users_roles (
     PRIMARY KEY (role_id, user_id)
 )
 
-CREATE TABLE IF NOT EXISTS users_shops (
-    user_id UUID REFERENCES users(user_id) ON UPDATE CASCADE ON DELETE CASCADE,
-    shop_id UUID REFERENCES shops(shop_id) ON UPDATE CASCADE ON DELETE CASCADE,
-    PRIMARY KEY (user_id, shop_id)
-)
-
 
 CREATE TABLE IF NOT EXISTS products (
     product_id UUID PRIMARY KEY,

@@ -1,16 +1,12 @@
 package com.shopping.product.model;
 
 import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.Type;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 import static java.util.stream.Collectors.toList;
 
@@ -55,6 +51,8 @@ public class User implements UserDetails {
       inverseJoinColumns = @JoinColumn(name = "role_id"))
   List<Role> roles = new ArrayList<>();
 
+  @OneToMany(mappedBy = "ownedBy", cascade = CascadeType.ALL)
+  private Set<Shop> shops;
 
   @Override
   public Collection<? extends GrantedAuthority> getAuthorities() {

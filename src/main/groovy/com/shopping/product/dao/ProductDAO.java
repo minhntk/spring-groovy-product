@@ -1,8 +1,6 @@
 package com.shopping.product.dao;
 
 import com.shopping.product.model.Product;
-import org.hibernate.Criteria;
-import org.hibernate.query.Query;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.TypedQuery;

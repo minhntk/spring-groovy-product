@@ -2,7 +2,6 @@ package com.shopping.product.dao
 
 import com.shopping.product.model.Product
 import com.shopping.product.model.User
-import org.hibernate.query.Query
 import org.springframework.stereotype.Repository
 
 import javax.persistence.NoResultException

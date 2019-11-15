@@ -14,7 +14,7 @@ class ProductController {
   @Autowired
   private ProductServiceTrait productService;
 
-  @RequestMapping(value='/list', method = RequestMethod.GET)
+  @RequestMapping(value = '/list', method = RequestMethod.GET)
   public List<Product> getListOfProducts() {
     return productService.getAllProducts()
   }
