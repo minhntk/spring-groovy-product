@@ -3,6 +3,7 @@ package com.shopping.product.service
 import com.shopping.product.dao.UserDAO
 import com.shopping.product.dto.RegisterRequestDTO
 import com.shopping.product.model.User
+import com.shopping.product.repository.UserRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
@@ -17,6 +18,9 @@ class UserServiceImpl implements UserServiceTrait {
   @Autowired
   private PasswordEncoder passwordEncoder;
 
+  @Autowired
+  private UserRepository userRepository;
+
   @Override
   @Transactional
   User registerUser(RegisterRequestDTO requestDTO) {
@@ -25,9 +29,10 @@ class UserServiceImpl implements UserServiceTrait {
     if (existUser != null) {
       return null;
     }
+    def users = userRepository.findAll()
     User user = convertToUser(requestDTO)
     user.setPassword(passwordEncoder.encode(user.getPassword()));
-    userDAO.create(user)
+    userRepository.save(user)
     return user;
   }
 

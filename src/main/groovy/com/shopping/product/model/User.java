@@ -14,7 +14,6 @@ import static java.util.stream.Collectors.toList;
 @Table(name = "users")
 public class User implements UserDetails {
   public User() {
-
   }
 
   @Id

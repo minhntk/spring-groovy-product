@@ -5,7 +5,7 @@ import javax.persistence.PersistenceContext;
 import java.io.Serializable;
 import java.util.List;
 
-public class AbstractJpaDAO<T extends Serializable> {
+public class AbstractJpaDAO<T> {
   private Class<T> clazz;
 
   @PersistenceContext
