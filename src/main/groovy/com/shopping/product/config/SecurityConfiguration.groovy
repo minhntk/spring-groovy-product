@@ -61,7 +61,14 @@ class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
         .and()
         .authorizeRequests()
-        .antMatchers("/api/v1/user/login", "/api/v1/user/register").permitAll()
+        .antMatchers(
+            "/api/v1/user/login",
+            "/api/v1/user/register",
+            "/gs-guide-websocket/**",
+            "/app/chat.sendMessage",
+            "/topic/greetings"
+        )
+        .permitAll()
         .antMatchers("/api/v1/admin/**").hasRole("ADMIN")
         .anyRequest().authenticated();
   }
@@ -69,7 +76,7 @@ class SecurityConfiguration extends WebSecurityConfigurerAdapter {
   @Bean
   CorsConfigurationSource corsConfigurationSource() {
     CorsConfiguration configuration = new CorsConfiguration();
-    //configuration.setAllowedOrigins(Arrays.asList("http://localhost:9000"));
+    //configuration.setAllowedOrigins(Arrays.asList("http://localhost:8080"));
     configuration.setAllowedOrigins(Arrays.asList("*"));
     configuration.setAllowedMethods(Arrays.asList(
         HttpMethod.OPTIONS.name(),

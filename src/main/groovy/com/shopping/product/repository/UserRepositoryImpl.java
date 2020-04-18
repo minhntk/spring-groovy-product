@@ -11,8 +11,4 @@ public class UserRepositoryImpl implements UserCustomRepository {
   public List<User> findAll() {
     return null;
   }
-//  @Override
-//  public List<User> findByLastname(String lastname) {
-//    return null;
-//  }
 }

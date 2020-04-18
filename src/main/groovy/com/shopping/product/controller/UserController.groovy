@@ -2,6 +2,7 @@ package com.shopping.product.controller
 
 import com.shopping.product.dto.LoginRequestDTO
 import com.shopping.product.dto.RegisterRequestDTO
+import com.shopping.product.dto.response.AuthenticationDTO
 import com.shopping.product.model.User
 import com.shopping.product.service.UserServiceTrait
 import org.springframework.beans.factory.annotation.Autowired
@@ -15,6 +16,7 @@ import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestMethod
+import org.springframework.web.bind.annotation.ResponseBody
 import org.springframework.web.bind.annotation.RestController
 
 import javax.validation.Valid
@@ -30,6 +32,7 @@ class UserController {
   AuthenticationManager authenticationManager;
 
   @RequestMapping(value = '/login', method = RequestMethod.POST)
+  @ResponseBody
   public ResponseEntity<UserDetails> doLogin(@Valid @RequestBody LoginRequestDTO loginRequestDTO) {
     try {
       Authentication authentication = authenticationManager.authenticate(
@@ -41,15 +44,15 @@ class UserController {
 
       SecurityContextHolder.getContext().setAuthentication(authentication);
       UserDetails userDetails = authentication.getPrincipal();
+      User authenticatedUser = userDetails.getUserDetails();
+      AuthenticationDTO authenticationDTO = new AuthenticationDTO(authenticatedUser.getUsername(), authenticatedUser.getUserId());
       return ResponseEntity
           .status(HttpStatus.OK)
-          .body(userDetails);
-    } catch (Exception) {
-      return ResponseEntity.status(HttpStatus.FORBIDDEN);
+          .body(authenticationDTO);
+    } catch (Exception ex) {
+      System.out.println(ex);
+      return new ResponseEntity<Object>().status(HttpStatus.FORBIDDEN);
     }
-
-
-    return null;
   }
 
   @RequestMapping(value = '/register', method = RequestMethod.POST)

@@ -29,7 +29,6 @@ class UserServiceImpl implements UserServiceTrait {
     if (existUser != null) {
       return null;
     }
-    def users = userRepository.findAll()
     User user = convertToUser(requestDTO)
     user.setPassword(passwordEncoder.encode(user.getPassword()));
     userRepository.save(user)
