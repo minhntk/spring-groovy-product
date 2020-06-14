@@ -64,6 +64,7 @@ class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         .antMatchers(
             "/api/v1/user/login",
             "/api/v1/user/register",
+            "/api/v1/user/get-hello",
             "/gs-guide-websocket/**",
             "/app/chat.sendMessage",
             "/topic/greetings"

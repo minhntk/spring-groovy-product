@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody
 import org.springframework.web.bind.annotation.RestController
 
 import javax.validation.Valid
+import java.util.concurrent.CompletableFuture
 
 @RestController
 @RequestMapping('/api/v1/user')
@@ -30,6 +31,12 @@ class UserController {
 
   @Autowired
   AuthenticationManager authenticationManager;
+
+
+  @RequestMapping(value = '/get-hello', method = RequestMethod.GET)
+  public CompletableFuture<String> sendHelloMessage() {
+    return userService.findUser('shop_moderator');
+  }
 
   @RequestMapping(value = '/login', method = RequestMethod.POST)
   @ResponseBody

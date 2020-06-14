@@ -7,6 +7,8 @@ import com.shopping.product.model.User
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 
+import java.util.concurrent.CompletableFuture
+
 @Service
 trait UserServiceTrait {
 
@@ -16,6 +18,8 @@ trait UserServiceTrait {
   public abstract User registerUser(RegisterRequestDTO requestDTO);
 
   public abstract User findUserByUserName(String username);
+
+  public abstract CompletableFuture<User> findUser(String username);
 
   public User convertToUser(RegisterRequestDTO requestDTO) {
     def role = roleService.find(1L)

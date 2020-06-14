@@ -5,9 +5,12 @@ import com.shopping.product.dto.RegisterRequestDTO
 import com.shopping.product.model.User
 import com.shopping.product.repository.UserRepository
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.scheduling.annotation.Async
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
+
+import java.util.concurrent.CompletableFuture
 
 @Service
 class UserServiceImpl implements UserServiceTrait {
@@ -38,5 +41,12 @@ class UserServiceImpl implements UserServiceTrait {
   @Override
   User findUserByUserName(String username) {
     return userDAO.findUserByUsername(username);
+  }
+
+  @Async
+  public CompletableFuture<User> findUser(String username) throws InterruptedException {
+    User results = userDAO.findUserByUsername(username);
+    Thread.sleep(1000L);
+    return CompletableFuture.completedFuture(results);
   }
 }
